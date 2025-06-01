@@ -30,6 +30,7 @@ import com.veragames.sudokufun.ui.presentation.components.CharacterValue
 import com.veragames.sudokufun.ui.presentation.components.GameButtonRow
 import com.veragames.sudokufun.ui.presentation.components.GameDialog
 import com.veragames.sudokufun.ui.presentation.components.GameTopBar
+import com.veragames.sudokufun.ui.presentation.components.ThemeSelector
 
 @Composable
 fun GameScreen(
@@ -44,12 +45,26 @@ fun GameScreen(
             GameTopBar(
                 userScore = state.score,
                 onBackClick = {},
-                onThemeClick = {},
+                onThemeClick = {
+                    if (state.showThemeSelector.not()) {
+                        viewModel.showThemeSelector(true)
+                    }
+                },
                 onSettingsClick = {},
+                setIconThemePosition = viewModel::setIconThemePosition,
             )
         },
         modifier = Modifier.fillMaxSize(),
     ) { paddingValues ->
+
+        if (state.showThemeSelector) {
+            ThemeSelector(
+                currentTheme = state.currentTheme,
+                onThemeClick = {},
+                onDismissRequest = { viewModel.showThemeSelector(false) },
+                offset = state.themeIconOffset,
+            )
+        }
         Column(
             modifier =
                 Modifier

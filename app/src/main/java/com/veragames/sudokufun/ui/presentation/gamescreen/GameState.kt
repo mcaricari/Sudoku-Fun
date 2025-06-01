@@ -1,6 +1,8 @@
 package com.veragames.sudokufun.ui.presentation.gamescreen
 
+import androidx.compose.ui.unit.IntOffset
 import com.veragames.sudokufun.data.model.SudokuValue
+import com.veragames.sudokufun.ui.model.AppTheme
 import com.veragames.sudokufun.ui.model.CellUI
 
 data class GameState(
@@ -17,4 +19,7 @@ data class GameState(
     val completed: Boolean = false,
     val notesEnabled: Boolean = false,
     val selectedValue: SudokuValue? = null,
+    val showThemeSelector: Boolean = false,
+    val currentTheme: AppTheme = AppTheme.GREEN,
+    val themeIconOffset: IntOffset = IntOffset(0, 0),
 )

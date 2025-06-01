@@ -1,4 +1,4 @@
-package com.veragames.sudokufun.ui.presentation.mainscreen
+package com.veragames.sudokufun.ui.presentation.homescreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,7 +20,7 @@ import com.veragames.sudokufun.ui.theme.SudokuFunTheme
 import com.veragames.sudokufun.ui.util.TestTags
 
 @Composable
-fun MainScreen(onNewGame: () -> Unit) {
+fun HomeScreen(onNewGame: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround,
@@ -44,6 +44,6 @@ fun MainScreen(onNewGame: () -> Unit) {
 @Composable
 private fun MainScreenPrev() {
     SudokuFunTheme {
-        MainScreen({})
+        HomeScreen({})
     }
 }

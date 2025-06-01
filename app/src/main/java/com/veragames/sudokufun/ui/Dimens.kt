@@ -11,4 +11,8 @@ object Dimens {
     val TOP_BAR_ICON_SIZE = 30.dp
     val GENERAL_ELEVATION = 8.dp
     val GENERAL_PRESSED_ELEVATION = 16.dp
+    val THEME_CIRCLE_SIZE = 48.dp
+    const val THEME_CIRCLE_BORDER_INCREMENT = 4f
+    const val THEME_SELECTOR_TO_THEME_ICON_OFFSET_X = -400
+    const val THEME_SELECTOR_TO_THEME_ICON_OFFSET_Y = 48
 }

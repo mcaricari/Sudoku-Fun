@@ -1,11 +1,14 @@
 package com.veragames.sudokufun.ui.presentation.gamescreen
 
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.IntOffset
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.veragames.sudokufun.data.model.SudokuValue
 import com.veragames.sudokufun.domain.model.BoardSize
 import com.veragames.sudokufun.domain.model.CellStatus
 import com.veragames.sudokufun.domain.usecases.game.GameUseCases
+import com.veragames.sudokufun.ui.Dimens
 import com.veragames.sudokufun.ui.model.CellUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -123,6 +126,30 @@ class GameViewModel
                 _state.update {
                     it.copy(
                         selectedValue = sudokuValue,
+                    )
+                }
+            }
+        }
+
+        fun showThemeSelector(show: Boolean) {
+            viewModelScope.launch {
+                _state.update {
+                    it.copy(
+                        showThemeSelector = show,
+                    )
+                }
+            }
+        }
+
+        fun setIconThemePosition(offset: Offset) {
+            viewModelScope.launch {
+                _state.update {
+                    it.copy(
+                        themeIconOffset =
+                            IntOffset(
+                                offset.x.toInt().plus(Dimens.THEME_SELECTOR_TO_THEME_ICON_OFFSET_X),
+                                offset.y.toInt().plus(Dimens.THEME_SELECTOR_TO_THEME_ICON_OFFSET_Y),
+                            ),
                     )
                 }
             }
