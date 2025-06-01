@@ -150,7 +150,7 @@ class GameViewModel
 
         fun changeTheme(theme: AppTheme) {
             viewModelScope.launch {
-                appUseCases.updateStringUserPreference(PreferencesKeys.THEME, theme.name)
+                appUseCases.updateUserPreference(PreferencesKeys.THEME, theme.name)
                 updateTheme()
             }
         }

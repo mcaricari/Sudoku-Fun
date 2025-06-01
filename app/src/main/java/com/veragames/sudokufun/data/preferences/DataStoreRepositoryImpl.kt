@@ -2,9 +2,10 @@ package com.veragames.sudokufun.data.preferences
 
 import android.content.Context
 import android.util.Log
-import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -28,17 +29,22 @@ class DataStoreRepositoryImpl
                     UserPreferences(
                         theme =
                             AppTheme.valueOf(
-                                preferences[PreferencesKeys.THEME] ?: AppTheme.GREEN.name,
+                                preferences[stringPreferencesKey(PreferencesKeys.THEME)]
+                                    ?: AppTheme.GREEN.name,
                             ),
                     )
                 }
 
-        override suspend fun updateStringPreference(
-            key: Preferences.Key<String>,
-            value: String,
+        override suspend fun updatePreference(
+            key: String,
+            value: Any,
         ) {
             context.dataStore.edit { preferences ->
-                preferences[key] = value
+                when (value) {
+                    is String -> preferences[stringPreferencesKey(key)] = value
+                    is Boolean -> preferences[booleanPreferencesKey(key)] = value
+                    else -> Log.e(TAG, "Error updating preference. Wrong types")
+                }
             }
         }
 
