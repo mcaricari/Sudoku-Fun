@@ -155,6 +155,12 @@ class GameViewModel
             }
         }
 
+        fun enableDarkMode(enable: Boolean) {
+            viewModelScope.launch {
+                appUseCases.updateUserPreference(PreferencesKeys.DARK_MODE, enable)
+            }
+        }
+
         fun setIconThemePosition(offset: Offset) {
             viewModelScope.launch {
                 _state.update {
