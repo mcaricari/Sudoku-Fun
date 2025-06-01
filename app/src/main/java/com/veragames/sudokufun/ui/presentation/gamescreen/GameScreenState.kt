@@ -5,7 +5,7 @@ import com.veragames.sudokufun.data.model.SudokuValue
 import com.veragames.sudokufun.data.preferences.AppTheme
 import com.veragames.sudokufun.ui.model.CellUI
 
-data class GameState(
+data class GameScreenState(
     val board: List<CellUI> = emptyList(),
     val time: String = "00:00",
     val difficulty: String = "Easy",
@@ -21,5 +21,6 @@ data class GameState(
     val selectedValue: SudokuValue? = null,
     val showThemeSelector: Boolean = false,
     val currentTheme: AppTheme = AppTheme.GREEN,
+    val darkModeEnabled: Boolean = false,
     val themeIconOffset: IntOffset = IntOffset(0, 0),
 )

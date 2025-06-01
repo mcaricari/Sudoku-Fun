@@ -32,6 +32,8 @@ class DataStoreRepositoryImpl
                                 preferences[stringPreferencesKey(PreferencesKeys.THEME)]
                                     ?: AppTheme.GREEN.name,
                             ),
+                        darkMode =
+                            preferences[booleanPreferencesKey(PreferencesKeys.DARK_MODE)] == true,
                     )
                 }
 

@@ -32,8 +32,8 @@ class GameViewModel
     ) : ViewModel() {
         private val formatter = SimpleDateFormat("mm:ss", Locale.getDefault())
         private val initiated = MutableStateFlow(false)
-        private val _state = MutableStateFlow(GameState())
-        val state: StateFlow<GameState> = _state.asStateFlow()
+        private val _state = MutableStateFlow(GameScreenState())
+        val state: StateFlow<GameScreenState> = _state.asStateFlow()
 
         init {
             getBoard()
@@ -158,6 +158,7 @@ class GameViewModel
         fun enableDarkMode(enable: Boolean) {
             viewModelScope.launch {
                 appUseCases.updateUserPreference(PreferencesKeys.DARK_MODE, enable)
+                updateTheme()
             }
         }
 
@@ -180,6 +181,7 @@ class GameViewModel
                 _state.update {
                     it.copy(
                         currentTheme = preferences.theme!!,
+                        darkModeEnabled = preferences.darkMode!!,
                     )
                 }
             }
