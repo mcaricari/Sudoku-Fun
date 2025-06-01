@@ -5,8 +5,11 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.veragames.sudokufun.data.model.SudokuValue
+import com.veragames.sudokufun.data.preferences.AppTheme
+import com.veragames.sudokufun.data.preferences.PreferencesKeys
 import com.veragames.sudokufun.domain.model.BoardSize
 import com.veragames.sudokufun.domain.model.CellStatus
+import com.veragames.sudokufun.domain.usecases.app.AppUseCases
 import com.veragames.sudokufun.domain.usecases.game.GameUseCases
 import com.veragames.sudokufun.ui.Dimens
 import com.veragames.sudokufun.ui.model.CellUI
@@ -25,6 +28,7 @@ class GameViewModel
     @Inject
     constructor(
         private val gameUseCases: GameUseCases,
+        private val appUseCases: AppUseCases,
     ) : ViewModel() {
         private val formatter = SimpleDateFormat("mm:ss", Locale.getDefault())
         private val initiated = MutableStateFlow(false)
@@ -35,6 +39,9 @@ class GameViewModel
             getBoard()
             startResolutionChronometer()
             checkIfGameIsRunning()
+            viewModelScope.launch {
+                updateTheme()
+            }
         }
 
         fun selectCell(cellUI: CellUI) {
@@ -141,6 +148,13 @@ class GameViewModel
             }
         }
 
+        fun changeTheme(theme: AppTheme) {
+            viewModelScope.launch {
+                appUseCases.updateStringUserPreference(PreferencesKeys.THEME, theme.name)
+                updateTheme()
+            }
+        }
+
         fun setIconThemePosition(offset: Offset) {
             viewModelScope.launch {
                 _state.update {
@@ -150,6 +164,16 @@ class GameViewModel
                                 offset.x.toInt().plus(Dimens.THEME_SELECTOR_TO_THEME_ICON_OFFSET_X),
                                 offset.y.toInt().plus(Dimens.THEME_SELECTOR_TO_THEME_ICON_OFFSET_Y),
                             ),
+                    )
+                }
+            }
+        }
+
+        private suspend fun updateTheme() {
+            appUseCases.getPreferences().collect { preferences ->
+                _state.update {
+                    it.copy(
+                        currentTheme = preferences.theme!!,
                     )
                 }
             }

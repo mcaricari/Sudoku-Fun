@@ -2,7 +2,7 @@ package com.veragames.sudokufun.ui.presentation.gamescreen
 
 import androidx.compose.ui.unit.IntOffset
 import com.veragames.sudokufun.data.model.SudokuValue
-import com.veragames.sudokufun.ui.model.AppTheme
+import com.veragames.sudokufun.data.preferences.AppTheme
 import com.veragames.sudokufun.ui.model.CellUI
 
 data class GameState(

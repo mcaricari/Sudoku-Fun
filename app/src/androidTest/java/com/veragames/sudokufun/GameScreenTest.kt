@@ -10,7 +10,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
 import com.veragames.sudokufun.data.FakeBoardSupplier
-import com.veragames.sudokufun.data.mockedBoardSolved
+import com.veragames.sudokufun.data.board.mockedBoardSolved
 import com.veragames.sudokufun.data.model.Cell
 import com.veragames.sudokufun.data.model.SudokuValue
 import com.veragames.sudokufun.domain.repository.GameRepository

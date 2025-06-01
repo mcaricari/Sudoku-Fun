@@ -1,4 +1,4 @@
-package com.veragames.sudokufun.ui.model
+package com.veragames.sudokufun.data.preferences
 
 enum class AppTheme {
     GREEN,

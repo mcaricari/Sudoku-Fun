@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
+import com.veragames.sudokufun.data.preferences.AppTheme
 import com.veragames.sudokufun.ui.Dimens
-import com.veragames.sudokufun.ui.model.AppTheme
 import com.veragames.sudokufun.ui.theme.SudokuFunTheme
 import com.veragames.sudokufun.ui.theme.green.greenLightScheme
 import com.veragames.sudokufun.ui.theme.red.redLightScheme

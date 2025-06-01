@@ -60,7 +60,7 @@ fun GameScreen(
         if (state.showThemeSelector) {
             ThemeSelector(
                 currentTheme = state.currentTheme,
-                onThemeClick = {},
+                onThemeClick = viewModel::changeTheme,
                 onDismissRequest = { viewModel.showThemeSelector(false) },
                 offset = state.themeIconOffset,
             )

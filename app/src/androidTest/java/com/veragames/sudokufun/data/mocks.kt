@@ -1,5 +1,6 @@
 package com.veragames.sudokufun.data
 
+import com.veragames.sudokufun.data.board.BoardSupplier
 import com.veragames.sudokufun.data.model.Cell
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

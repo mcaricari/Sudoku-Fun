@@ -1,8 +1,8 @@
 package com.veragames.sudokufun.domain.usecases
 
 import com.veragames.sudokufun.data.FakeBoardSupplier
-import com.veragames.sudokufun.data.mockedBoard
-import com.veragames.sudokufun.data.mockedBoardSolved
+import com.veragames.sudokufun.data.board.mockedBoard
+import com.veragames.sudokufun.data.board.mockedBoardSolved
 import com.veragames.sudokufun.data.model.SudokuValue
 import com.veragames.sudokufun.domain.model.BoardSize
 import com.veragames.sudokufun.domain.repository.GameRepository

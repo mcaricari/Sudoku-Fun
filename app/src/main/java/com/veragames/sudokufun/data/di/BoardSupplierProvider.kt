@@ -1,7 +1,7 @@
 package com.veragames.sudokufun.data.di
 
-import com.veragames.sudokufun.data.BoardSupplier
-import com.veragames.sudokufun.data.JsonBoardSupplier
+import com.veragames.sudokufun.data.board.BoardSupplier
+import com.veragames.sudokufun.data.board.JsonBoardSupplier
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
