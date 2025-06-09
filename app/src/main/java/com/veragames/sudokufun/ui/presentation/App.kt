@@ -14,6 +14,8 @@ import com.veragames.sudokufun.ui.theme.blue.blueDarkScheme
 import com.veragames.sudokufun.ui.theme.blue.blueLightScheme
 import com.veragames.sudokufun.ui.theme.green.greenDarkScheme
 import com.veragames.sudokufun.ui.theme.green.greenLightScheme
+import com.veragames.sudokufun.ui.theme.grey.greyDarkScheme
+import com.veragames.sudokufun.ui.theme.grey.greyLightScheme
 import com.veragames.sudokufun.ui.theme.red.redDarkScheme
 import com.veragames.sudokufun.ui.theme.red.redLightScheme
 
@@ -26,6 +28,7 @@ fun App(viewModel: MainViewModel = hiltViewModel()) {
             AppTheme.GREEN -> if (state.value.darkMode == true) greenDarkScheme else greenLightScheme
             AppTheme.RED -> if (state.value.darkMode == true) redDarkScheme else redLightScheme
             AppTheme.BLUE -> if (state.value.darkMode == true) blueDarkScheme else blueLightScheme
+            AppTheme.GREY -> if (state.value.darkMode == true) greyDarkScheme else greyLightScheme
             null -> null
         }
     if (theme != null) {

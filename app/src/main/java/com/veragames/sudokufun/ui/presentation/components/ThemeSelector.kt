@@ -31,6 +31,7 @@ import com.veragames.sudokufun.ui.Dimens
 import com.veragames.sudokufun.ui.theme.SudokuFunTheme
 import com.veragames.sudokufun.ui.theme.blue.blueLightScheme
 import com.veragames.sudokufun.ui.theme.green.greenLightScheme
+import com.veragames.sudokufun.ui.theme.grey.greyLightScheme
 import com.veragames.sudokufun.ui.theme.red.redLightScheme
 
 @Composable
@@ -45,6 +46,7 @@ fun ThemeCircle(
             AppTheme.GREEN -> greenLightScheme.primary
             AppTheme.RED -> redLightScheme.primary
             AppTheme.BLUE -> blueLightScheme.primary
+            AppTheme.GREY -> greyLightScheme.primary
         }
     val borderColor = MaterialTheme.colorScheme.inversePrimary
     Canvas(
@@ -121,6 +123,11 @@ fun ThemeSelector(
                 ThemeCircle(
                     onClick = onThemeClick,
                     appTheme = AppTheme.BLUE,
+                    selected = currentTheme == AppTheme.BLUE,
+                )
+                ThemeCircle(
+                    onClick = onThemeClick,
+                    appTheme = AppTheme.GREY,
                     selected = currentTheme == AppTheme.BLUE,
                 )
             }

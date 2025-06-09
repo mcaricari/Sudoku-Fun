@@ -4,4 +4,5 @@ enum class AppTheme {
     GREEN,
     RED,
     BLUE,
+    GREY,
 }
