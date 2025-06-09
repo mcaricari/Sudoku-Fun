@@ -20,7 +20,6 @@ import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
@@ -30,6 +29,7 @@ import androidx.compose.ui.window.PopupProperties
 import com.veragames.sudokufun.data.preferences.AppTheme
 import com.veragames.sudokufun.ui.Dimens
 import com.veragames.sudokufun.ui.theme.SudokuFunTheme
+import com.veragames.sudokufun.ui.theme.blue.blueLightScheme
 import com.veragames.sudokufun.ui.theme.green.greenLightScheme
 import com.veragames.sudokufun.ui.theme.red.redLightScheme
 
@@ -44,7 +44,7 @@ fun ThemeCircle(
         when (appTheme) {
             AppTheme.GREEN -> greenLightScheme.primary
             AppTheme.RED -> redLightScheme.primary
-            AppTheme.BLACK -> Color.Black
+            AppTheme.BLUE -> blueLightScheme.primary
         }
     val borderColor = MaterialTheme.colorScheme.inversePrimary
     Canvas(
@@ -120,8 +120,8 @@ fun ThemeSelector(
                 )
                 ThemeCircle(
                     onClick = onThemeClick,
-                    appTheme = AppTheme.BLACK,
-                    selected = currentTheme == AppTheme.BLACK,
+                    appTheme = AppTheme.BLUE,
+                    selected = currentTheme == AppTheme.BLUE,
                 )
             }
             Row(

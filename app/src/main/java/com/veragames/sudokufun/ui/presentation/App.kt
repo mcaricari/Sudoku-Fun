@@ -10,6 +10,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.veragames.sudokufun.data.preferences.AppTheme
 import com.veragames.sudokufun.ui.navigation.AppNavHost
 import com.veragames.sudokufun.ui.theme.SudokuFunTheme
+import com.veragames.sudokufun.ui.theme.blue.blueDarkScheme
+import com.veragames.sudokufun.ui.theme.blue.blueLightScheme
 import com.veragames.sudokufun.ui.theme.green.greenDarkScheme
 import com.veragames.sudokufun.ui.theme.green.greenLightScheme
 import com.veragames.sudokufun.ui.theme.red.redDarkScheme
@@ -23,7 +25,7 @@ fun App(viewModel: MainViewModel = hiltViewModel()) {
         when (state.value.theme) {
             AppTheme.GREEN -> if (state.value.darkMode == true) greenDarkScheme else greenLightScheme
             AppTheme.RED -> if (state.value.darkMode == true) redDarkScheme else redLightScheme
-            AppTheme.BLACK -> if (state.value.darkMode == true) greenDarkScheme else greenLightScheme
+            AppTheme.BLUE -> if (state.value.darkMode == true) blueDarkScheme else blueLightScheme
             null -> null
         }
     if (theme != null) {
