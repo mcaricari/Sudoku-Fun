@@ -1,15 +1,18 @@
 package com.veragames.sudokufun.domain.usecases
 
-import com.veragames.sudokufun.data.FakeBoardSupplier
+import com.veragames.sudokufun.data.board.BoardSupplier
 import com.veragames.sudokufun.data.board.mockedBoard
 import com.veragames.sudokufun.data.board.mockedBoardSolved
 import com.veragames.sudokufun.data.model.SudokuValue
 import com.veragames.sudokufun.domain.model.BoardSize
 import com.veragames.sudokufun.domain.repository.GameRepository
 import com.veragames.sudokufun.domain.repository.GameRepositoryImpl
+import io.mockk.every
+import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertNotEquals
 import org.junit.Before
@@ -17,10 +20,15 @@ import org.junit.Test
 
 class GameRepositoryTest {
     private lateinit var repository: GameRepository
+    private val fakeBoardSupplier: BoardSupplier =
+        mockk {
+            every { getBoard(any()) } returns flowOf(mockedBoard)
+            every { getSolvedBoard(any()) } returns flowOf(mockedBoardSolved)
+        }
 
     @Before
     fun setUp() {
-        repository = GameRepositoryImpl(FakeBoardSupplier())
+        repository = GameRepositoryImpl(fakeBoardSupplier)
         runTest {
             repository.loadBoard(BoardSize.NINE)
         }
@@ -181,7 +189,7 @@ class GameRepositoryTest {
     @Test
     fun `checks game completion returns true when game is completed`() {
         runTest {
-            mockedBoardSolved.filter { it.userCell == true }.forEach {
+            mockedBoardSolved.forEach {
                 repository.setCellValue(it, it.value)
             }
             assertTrue(repository.checkGameCompletion())
