@@ -64,13 +64,9 @@ fun GameScreen(
                 onDismissRequest = { viewModel.showThemeSelector(false) },
                 offset = state.themeIconOffset,
                 darkModeEnabled = state.darkModeEnabled,
-                onDarkModeSwitchClick = {
-                    if (state.darkModeEnabled) {
-                        viewModel.enableDarkMode(false)
-                    } else {
-                        viewModel.enableDarkMode(true)
-                    }
-                },
+                onDarkModeSwitchClick = viewModel::enableDarkMode,
+                systemDefaultThemeEnabled = state.systemDefaultThemeEnabled,
+                onSystemDefaultThemeSwitchClick = viewModel::enableSystemDefaultTheme,
             )
         }
         Column(

@@ -1,38 +1,33 @@
 package com.veragames.sudokufun.ui.presentation
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.veragames.sudokufun.data.preferences.AppTheme
 import com.veragames.sudokufun.ui.navigation.AppNavHost
 import com.veragames.sudokufun.ui.theme.SudokuFunTheme
-import com.veragames.sudokufun.ui.theme.blue.blueDarkScheme
-import com.veragames.sudokufun.ui.theme.blue.blueLightScheme
-import com.veragames.sudokufun.ui.theme.green.greenDarkScheme
-import com.veragames.sudokufun.ui.theme.green.greenLightScheme
-import com.veragames.sudokufun.ui.theme.grey.greyDarkScheme
-import com.veragames.sudokufun.ui.theme.grey.greyLightScheme
-import com.veragames.sudokufun.ui.theme.red.redDarkScheme
-import com.veragames.sudokufun.ui.theme.red.redLightScheme
 
 @Composable
-fun App(viewModel: MainViewModel = hiltViewModel()) {
-    val state = viewModel.preferencesState.collectAsState()
+fun App(
+    systemInDarkTheme: Boolean = isSystemInDarkTheme(),
+    viewModel: MainViewModel = hiltViewModel(),
+) {
+    val state by viewModel.state.collectAsState()
 
-    val theme =
-        when (state.value.theme) {
-            AppTheme.GREEN -> if (state.value.darkMode == true) greenDarkScheme else greenLightScheme
-            AppTheme.RED -> if (state.value.darkMode == true) redDarkScheme else redLightScheme
-            AppTheme.BLUE -> if (state.value.darkMode == true) blueDarkScheme else blueLightScheme
-            AppTheme.GREY -> if (state.value.darkMode == true) greyDarkScheme else greyLightScheme
-            null -> null
-        }
-    if (theme != null) {
-        SudokuFunTheme(theme) {
+    if (state.preferences.appTheme != null) {
+        val darkMode =
+            if (state.preferences.followSystemTheme) {
+                systemInDarkTheme
+            } else {
+                state.preferences.darkMode
+            }
+        val colorScheme = state.preferences.appTheme!!.getColorScheme(darkMode)
+        SudokuFunTheme(colorScheme) {
             Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                 AppNavHost(
                     modifier = Modifier.padding(innerPadding),

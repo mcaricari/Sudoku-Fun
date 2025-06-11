@@ -1,5 +1,6 @@
 package com.veragames.sudokufun.ui.presentation.components
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,12 +21,14 @@ import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
+import com.veragames.sudokufun.R
 import com.veragames.sudokufun.data.preferences.AppTheme
 import com.veragames.sudokufun.ui.Dimens
 import com.veragames.sudokufun.ui.theme.SudokuFunTheme
@@ -77,12 +80,49 @@ fun ThemeCircle(
 }
 
 @Composable
+fun ThemeOptionsRow(
+    checked: Boolean,
+    @StringRes textId: Int,
+    @StringRes onCheckedDescriptionId: Int,
+    onCheckedChange: (value: Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.End,
+    ) {
+        CommonText(
+            text = stringResource(textId),
+            modifier = Modifier.weight(1f),
+            textAlign = TextAlign.Start,
+        )
+        Switch(
+            checked = checked,
+            enabled = enabled,
+            onCheckedChange = { onCheckedChange(checked.not()) },
+            thumbContent = {
+                if (checked) {
+                    Icon(
+                        imageVector = Icons.Filled.Check,
+                        contentDescription = stringResource(onCheckedDescriptionId),
+                    )
+                }
+            },
+        )
+    }
+}
+
+@Composable
 fun ThemeSelector(
     currentTheme: AppTheme,
     darkModeEnabled: Boolean,
+    systemDefaultThemeEnabled: Boolean,
     onDismissRequest: () -> Unit,
     onThemeClick: (appTheme: AppTheme) -> Unit,
     onDarkModeSwitchClick: (enable: Boolean) -> Unit,
+    onSystemDefaultThemeSwitchClick: (enable: Boolean) -> Unit,
     offset: IntOffset,
     modifier: Modifier = Modifier,
 ) {
@@ -131,29 +171,19 @@ fun ThemeSelector(
                     selected = currentTheme == AppTheme.BLUE,
                 )
             }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.End,
-            ) {
-                CommonText(
-                    text = "Dark mode",
-                    modifier = Modifier.weight(1f),
-                    textAlign = TextAlign.Start,
-                )
-                Switch(
-                    checked = darkModeEnabled,
-                    onCheckedChange = { onDarkModeSwitchClick(darkModeEnabled.not()) },
-                    thumbContent = {
-                        if (darkModeEnabled) {
-                            Icon(
-                                imageVector = Icons.Filled.Check,
-                                contentDescription = null,
-                            )
-                        }
-                    },
-                )
-            }
+            ThemeOptionsRow(
+                checked = darkModeEnabled,
+                enabled = systemDefaultThemeEnabled.not(),
+                textId = R.string.dark_mode,
+                onCheckedDescriptionId = R.string.dark_mode_enabled,
+                onCheckedChange = { onDarkModeSwitchClick(darkModeEnabled.not()) },
+            )
+            ThemeOptionsRow(
+                checked = systemDefaultThemeEnabled,
+                textId = R.string.system_default,
+                onCheckedDescriptionId = R.string.system_default_theme_enabled,
+                onCheckedChange = { onSystemDefaultThemeSwitchClick(systemDefaultThemeEnabled.not()) },
+            )
         }
     }
 }
@@ -181,6 +211,8 @@ private fun ThemeSelectorPrev() {
             offset = IntOffset.Zero,
             darkModeEnabled = false,
             onDarkModeSwitchClick = {},
+            systemDefaultThemeEnabled = true,
+            onSystemDefaultThemeSwitchClick = {},
         )
     }
 }

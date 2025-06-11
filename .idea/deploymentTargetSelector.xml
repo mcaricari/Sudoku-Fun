@@ -14,6 +14,9 @@
       <SelectionState runConfigName="loads_board_on_screen()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="game_completes_and_shows_dialog()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>

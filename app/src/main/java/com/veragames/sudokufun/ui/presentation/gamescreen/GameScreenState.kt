@@ -22,5 +22,6 @@ data class GameScreenState(
     val showThemeSelector: Boolean = false,
     val currentTheme: AppTheme = AppTheme.GREEN,
     val darkModeEnabled: Boolean = false,
+    val systemDefaultThemeEnabled: Boolean = true,
     val themeIconOffset: IntOffset = IntOffset(0, 0),
 )

@@ -34,6 +34,9 @@ class DataStoreRepositoryImpl
                             ),
                         darkMode =
                             preferences[booleanPreferencesKey(PreferencesKeys.DARK_MODE)] == true,
+                        followSystemTheme =
+                            preferences[booleanPreferencesKey(PreferencesKeys.FOLLOW_SYSTEM_THEME)]
+                                == true,
                     )
                 }
 

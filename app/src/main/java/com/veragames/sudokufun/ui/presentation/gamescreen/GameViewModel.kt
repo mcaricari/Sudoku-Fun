@@ -162,6 +162,13 @@ class GameViewModel
             }
         }
 
+        fun enableSystemDefaultTheme(enable: Boolean) {
+            viewModelScope.launch {
+                appUseCases.updateUserPreference(PreferencesKeys.FOLLOW_SYSTEM_THEME, enable)
+                updateTheme()
+            }
+        }
+
         fun setIconThemePosition(offset: Offset) {
             viewModelScope.launch {
                 _state.update {
@@ -181,7 +188,8 @@ class GameViewModel
                 _state.update {
                     it.copy(
                         currentTheme = preferences.theme!!,
-                        darkModeEnabled = preferences.darkMode!!,
+                        darkModeEnabled = preferences.darkMode,
+                        systemDefaultThemeEnabled = preferences.followSystemTheme,
                     )
                 }
             }
