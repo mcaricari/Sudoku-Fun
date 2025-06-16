@@ -16,6 +16,7 @@ room_version = "2.7.1"
 datastore_version = "1.1.7"
 mokk = "1.13.2"
 coroutines = "1.7.3"
+kover = "0.7.6"
 
 [libraries]
 androidx-core = { module = "androidx.test:core", version.ref = "core" }
@@ -54,4 +55,5 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 daggerHiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 
