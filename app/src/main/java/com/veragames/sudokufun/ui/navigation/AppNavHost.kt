@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.veragames.sudokufun.ui.presentation.gamescreen.GameScreen
-import com.veragames.sudokufun.ui.presentation.mainscreen.MainScreen
+import com.veragames.sudokufun.ui.presentation.homescreen.HomeScreen
 
 @Composable
 fun AppNavHost(modifier: Modifier = Modifier) {
@@ -17,7 +17,7 @@ fun AppNavHost(modifier: Modifier = Modifier) {
         modifier = modifier,
     ) {
         composable(Screen.MAIN.name) {
-            MainScreen(
+            HomeScreen(
                 onNewGame = {
                     navController.navigate(Screen.GAME.name)
                 },

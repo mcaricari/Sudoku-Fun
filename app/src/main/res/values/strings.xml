@@ -16,4 +16,8 @@
     <string name="difficulty">Difficulty</string>
     <string name="go_to_main_screen">Go to main screen</string>
     <string name="game_completed">Game completed!</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="system_default">System default</string>
+    <string name="dark_mode_enabled">Dark mode theme enabled</string>"
+    <string name="system_default_theme_enabled">System default theme enabled</string>"
 </resources>

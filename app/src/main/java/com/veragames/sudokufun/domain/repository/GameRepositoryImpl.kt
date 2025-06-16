@@ -1,7 +1,7 @@
 package com.veragames.sudokufun.domain.repository
 
 import android.util.Log
-import com.veragames.sudokufun.data.BoardSupplier
+import com.veragames.sudokufun.data.board.BoardSupplier
 import com.veragames.sudokufun.data.model.Cell
 import com.veragames.sudokufun.data.model.Note
 import com.veragames.sudokufun.data.model.SudokuValue

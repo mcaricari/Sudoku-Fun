@@ -18,7 +18,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
-import com.veragames.sudokufun.data.mockedBoard
+import com.veragames.sudokufun.data.board.mockedBoard
 import com.veragames.sudokufun.data.model.Note
 import com.veragames.sudokufun.domain.model.CellStatus
 import com.veragames.sudokufun.ui.Dimens
@@ -48,7 +48,7 @@ fun Cell(
         }
 
         CellStatus.SELECTED -> {
-            color = MaterialTheme.colorScheme.primaryContainer
+            color = MaterialTheme.colorScheme.inversePrimary
             textColor = MaterialTheme.colorScheme.onPrimaryContainer
         }
 

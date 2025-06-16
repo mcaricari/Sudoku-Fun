@@ -10,6 +10,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -25,6 +28,7 @@ fun GameTopBar(
     onBackClick: () -> Unit,
     onThemeClick: () -> Unit,
     onSettingsClick: () -> Unit,
+    setIconThemePosition: (Offset) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
@@ -51,6 +55,10 @@ fun GameTopBar(
         actions = {
             IconButton(
                 onClick = onThemeClick,
+                modifier =
+                    Modifier.onGloballyPositioned { coordinates ->
+                        setIconThemePosition(coordinates.positionInWindow())
+                    },
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.icon_theme),
@@ -83,6 +91,7 @@ private fun TopAppBarPrev() {
             onBackClick = {},
             onThemeClick = {},
             onSettingsClick = {},
+            setIconThemePosition = {},
         )
     }
 }

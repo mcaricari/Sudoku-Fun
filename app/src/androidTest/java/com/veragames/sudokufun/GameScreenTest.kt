@@ -9,12 +9,19 @@ import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
-import com.veragames.sudokufun.data.FakeBoardSupplier
-import com.veragames.sudokufun.data.mockedBoardSolved
+import com.veragames.sudokufun.data.board.BoardSupplier
+import com.veragames.sudokufun.data.board.mockedBoard
+import com.veragames.sudokufun.data.board.mockedBoardSolved
 import com.veragames.sudokufun.data.model.Cell
 import com.veragames.sudokufun.data.model.SudokuValue
+import com.veragames.sudokufun.data.preferences.AppTheme
+import com.veragames.sudokufun.data.preferences.DataStoreRepository
+import com.veragames.sudokufun.data.preferences.UserPreferences
 import com.veragames.sudokufun.domain.repository.GameRepository
 import com.veragames.sudokufun.domain.repository.GameRepositoryImpl
+import com.veragames.sudokufun.domain.usecases.app.AppUseCases
+import com.veragames.sudokufun.domain.usecases.app.GetUserPreferences
+import com.veragames.sudokufun.domain.usecases.app.UpdateUserPreference
 import com.veragames.sudokufun.domain.usecases.game.CheckGameCompletion
 import com.veragames.sudokufun.domain.usecases.game.CheckIfGameIsRunning
 import com.veragames.sudokufun.domain.usecases.game.EraseCellValue
@@ -35,6 +42,9 @@ import com.veragames.sudokufun.ui.presentation.gamescreen.GameScreen
 import com.veragames.sudokufun.ui.presentation.gamescreen.GameViewModel
 import com.veragames.sudokufun.ui.theme.SudokuFunTheme
 import com.veragames.sudokufun.ui.util.TestTags
+import io.mockk.every
+import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -55,14 +65,31 @@ class GameScreenTest {
     private lateinit var showHint: ShowHint
     private lateinit var checkGameCompletion: CheckGameCompletion
     private lateinit var noteValue: NoteValue
+    private lateinit var getUserPreferences: GetUserPreferences
+    private lateinit var updateUserPreference: UpdateUserPreference
     private lateinit var gameViewModel: GameViewModel
+    private val fakeBoardSupplier: BoardSupplier =
+        mockk {
+            every { getBoard(any()) } returns flowOf(mockedBoard)
+            every { getSolvedBoard(any()) } returns flowOf(mockedBoardSolved)
+        }
+    private val fakeDataStoreRepository: DataStoreRepository =
+        mockk {
+            every { getPreferences() } returns
+                flowOf(
+                    UserPreferences(
+                        theme = AppTheme.GREY,
+                        darkMode = false,
+                    ),
+                )
+        }
 
     @get:Rule
     val composeTestRule = createComposeRule()
 
     @Before
     fun setUp() {
-        repository = GameRepositoryImpl(FakeBoardSupplier())
+        repository = GameRepositoryImpl(fakeBoardSupplier)
         loadBoardUseCase = LoadBoard(repository)
         setCellValueUseCase = SetCellValue(repository)
         getBoardUseCase = GetBoard(repository)
@@ -77,6 +104,8 @@ class GameScreenTest {
         showHint = ShowHint(repository)
         checkGameCompletion = CheckGameCompletion(repository)
         noteValue = NoteValue(repository)
+        getUserPreferences = GetUserPreferences(fakeDataStoreRepository)
+        updateUserPreference = UpdateUserPreference(fakeDataStoreRepository)
         gameViewModel =
             GameViewModel(
                 GameUseCases(
@@ -95,6 +124,7 @@ class GameScreenTest {
                     checkGameCompletion,
                     noteValue,
                 ),
+                AppUseCases(getUserPreferences, updateUserPreference),
             )
 
         composeTestRule.setContent {
@@ -110,8 +140,7 @@ class GameScreenTest {
     @Test
     fun loads_board_on_screen() {
         gameViewModel.state.value.board.forEach {
-            composeTestRule
-                .onNodeWithTag(getCellUiTag(it.cell.row, it.cell.col))
+            composeTestRule.onNodeWithTag(getCellUiTag(it.cell.row, it.cell.col))
                 .assertExists("La celda ${it.cell.row}, ${it.cell.col} no se muestra")
         }
     }
@@ -119,8 +148,7 @@ class GameScreenTest {
     @Test
     fun sets_value_on_board() {
         composeTestRule.onNodeWithTag(getCellUiTag(3, 4)).performClick()
-        composeTestRule
-            .onNodeWithTag(TestTags.getSudokuValueTestTag(SudokuValue.FIVE))
+        composeTestRule.onNodeWithTag(TestTags.getSudokuValueTestTag(SudokuValue.FIVE))
             .performClick()
         composeTestRule.onNodeWithTag(getCellUiTag(3, 4)).assertTextContains("5")
     }
@@ -182,7 +210,7 @@ class GameScreenTest {
     @Test
     fun game_completes_and_shows_dialog() {
         composeTestRule.apply {
-            mockedBoardSolved.filter { it.userCell == true }.forEach {
+            mockedBoardSolved.forEach {
                 onNodeWithTag(getCellUiTag(it.row, it.col)).performClick()
                 onNodeWithTag(getSudokuValueTag(it.value)).performClick()
             }

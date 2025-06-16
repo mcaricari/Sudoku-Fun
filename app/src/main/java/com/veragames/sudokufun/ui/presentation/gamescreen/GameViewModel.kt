@@ -1,11 +1,17 @@
 package com.veragames.sudokufun.ui.presentation.gamescreen
 
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.IntOffset
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.veragames.sudokufun.data.model.SudokuValue
+import com.veragames.sudokufun.data.preferences.AppTheme
+import com.veragames.sudokufun.data.preferences.PreferencesKeys
 import com.veragames.sudokufun.domain.model.BoardSize
 import com.veragames.sudokufun.domain.model.CellStatus
+import com.veragames.sudokufun.domain.usecases.app.AppUseCases
 import com.veragames.sudokufun.domain.usecases.game.GameUseCases
+import com.veragames.sudokufun.ui.Dimens
 import com.veragames.sudokufun.ui.model.CellUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,16 +28,18 @@ class GameViewModel
     @Inject
     constructor(
         private val gameUseCases: GameUseCases,
+        private val appUseCases: AppUseCases,
     ) : ViewModel() {
         private val formatter = SimpleDateFormat("mm:ss", Locale.getDefault())
         private val initiated = MutableStateFlow(false)
-        private val _state = MutableStateFlow(GameState())
-        val state: StateFlow<GameState> = _state.asStateFlow()
+        private val _state = MutableStateFlow(GameScreenState())
+        val state: StateFlow<GameScreenState> = _state.asStateFlow()
 
         init {
             getBoard()
             startResolutionChronometer()
             checkIfGameIsRunning()
+            checkPreferences()
         }
 
         fun selectCell(cellUI: CellUI) {
@@ -124,6 +132,62 @@ class GameViewModel
                     it.copy(
                         selectedValue = sudokuValue,
                     )
+                }
+            }
+        }
+
+        fun showThemeSelector(show: Boolean) {
+            viewModelScope.launch {
+                _state.update {
+                    it.copy(
+                        showThemeSelector = show,
+                    )
+                }
+            }
+        }
+
+        fun changeTheme(theme: AppTheme) {
+            viewModelScope.launch {
+                appUseCases.updateUserPreference(PreferencesKeys.THEME, theme.name)
+            }
+        }
+
+        fun enableDarkMode(enable: Boolean) {
+            viewModelScope.launch {
+                appUseCases.updateUserPreference(PreferencesKeys.DARK_MODE, enable)
+            }
+        }
+
+        fun enableSystemDefaultTheme(enable: Boolean) {
+            viewModelScope.launch {
+                appUseCases.updateUserPreference(PreferencesKeys.FOLLOW_SYSTEM_THEME, enable)
+            }
+        }
+
+        fun setIconThemePosition(offset: Offset) {
+            viewModelScope.launch {
+                _state.update {
+                    it.copy(
+                        themeIconOffset =
+                            IntOffset(
+                                offset.x.toInt().plus(Dimens.THEME_SELECTOR_TO_THEME_ICON_OFFSET_X),
+                                offset.y.toInt().plus(Dimens.THEME_SELECTOR_TO_THEME_ICON_OFFSET_Y),
+                            ),
+                    )
+                }
+            }
+        }
+
+        private fun checkPreferences() {
+            viewModelScope.launch {
+                appUseCases.getPreferences().collect { preferences ->
+                    _state.update {
+                        it.copy(
+                            currentTheme = preferences.theme!!,
+                            darkModeEnabled = preferences.darkMode,
+                            systemDefaultThemeEnabled = preferences.followSystemTheme,
+                        )
+                    }
                 }
             }
         }

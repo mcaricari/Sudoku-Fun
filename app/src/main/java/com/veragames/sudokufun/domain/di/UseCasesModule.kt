@@ -1,6 +1,10 @@
 package com.veragames.sudokufun.domain.di
 
+import com.veragames.sudokufun.data.preferences.DataStoreRepository
 import com.veragames.sudokufun.domain.repository.GameRepository
+import com.veragames.sudokufun.domain.usecases.app.AppUseCases
+import com.veragames.sudokufun.domain.usecases.app.GetUserPreferences
+import com.veragames.sudokufun.domain.usecases.app.UpdateUserPreference
 import com.veragames.sudokufun.domain.usecases.game.CheckGameCompletion
 import com.veragames.sudokufun.domain.usecases.game.CheckIfGameIsRunning
 import com.veragames.sudokufun.domain.usecases.game.EraseCellValue
@@ -41,5 +45,12 @@ object UseCasesModule {
             showHint = ShowHint(gameRepository),
             checkGameCompletion = CheckGameCompletion(gameRepository),
             noteValue = NoteValue(gameRepository),
+        )
+
+    @Provides
+    fun bindAppUseCases(dataStoreRepository: DataStoreRepository): AppUseCases =
+        AppUseCases(
+            getPreferences = GetUserPreferences(dataStoreRepository),
+            updateUserPreference = UpdateUserPreference(dataStoreRepository),
         )
 }
