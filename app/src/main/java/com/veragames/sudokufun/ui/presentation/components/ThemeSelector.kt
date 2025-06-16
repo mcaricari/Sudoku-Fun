@@ -168,7 +168,7 @@ fun ThemeSelector(
                 ThemeCircle(
                     onClick = onThemeClick,
                     appTheme = AppTheme.GREY,
-                    selected = currentTheme == AppTheme.BLUE,
+                    selected = currentTheme == AppTheme.GREY,
                 )
             }
             ThemeOptionsRow(

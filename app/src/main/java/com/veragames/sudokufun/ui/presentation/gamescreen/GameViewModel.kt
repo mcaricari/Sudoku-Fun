@@ -39,9 +39,7 @@ class GameViewModel
             getBoard()
             startResolutionChronometer()
             checkIfGameIsRunning()
-            viewModelScope.launch {
-                updateTheme()
-            }
+            checkPreferences()
         }
 
         fun selectCell(cellUI: CellUI) {
@@ -151,21 +149,18 @@ class GameViewModel
         fun changeTheme(theme: AppTheme) {
             viewModelScope.launch {
                 appUseCases.updateUserPreference(PreferencesKeys.THEME, theme.name)
-                updateTheme()
             }
         }
 
         fun enableDarkMode(enable: Boolean) {
             viewModelScope.launch {
                 appUseCases.updateUserPreference(PreferencesKeys.DARK_MODE, enable)
-                updateTheme()
             }
         }
 
         fun enableSystemDefaultTheme(enable: Boolean) {
             viewModelScope.launch {
                 appUseCases.updateUserPreference(PreferencesKeys.FOLLOW_SYSTEM_THEME, enable)
-                updateTheme()
             }
         }
 
@@ -183,14 +178,16 @@ class GameViewModel
             }
         }
 
-        private suspend fun updateTheme() {
-            appUseCases.getPreferences().collect { preferences ->
-                _state.update {
-                    it.copy(
-                        currentTheme = preferences.theme!!,
-                        darkModeEnabled = preferences.darkMode,
-                        systemDefaultThemeEnabled = preferences.followSystemTheme,
-                    )
+        private fun checkPreferences() {
+            viewModelScope.launch {
+                appUseCases.getPreferences().collect { preferences ->
+                    _state.update {
+                        it.copy(
+                            currentTheme = preferences.theme!!,
+                            darkModeEnabled = preferences.darkMode,
+                            systemDefaultThemeEnabled = preferences.followSystemTheme,
+                        )
+                    }
                 }
             }
         }

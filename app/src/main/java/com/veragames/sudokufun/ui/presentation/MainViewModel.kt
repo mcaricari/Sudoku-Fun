@@ -30,12 +30,6 @@ class MainViewModel
     constructor(
         private val appUseCases: AppUseCases,
     ) : ViewModel() {
-    /*val preferencesState: StateFlow<UserPreferences> =
-        appUseCases.getPreferences().stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(),
-            initialValue = UserPreferences(),
-        )*/
         private val _state = MutableStateFlow(AppState())
         val state: StateFlow<AppState> = _state.asStateFlow()
 
