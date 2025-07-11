@@ -41,7 +41,7 @@ class DataStoreRepositoryImpl
                             preferences[booleanPreferencesKey(PreferencesKeys.SOUND_EFFECTS)]
                                 == true,
                         timer =
-                            preferences[booleanPreferencesKey(PreferencesKeys.TIMER)]
+                            preferences[booleanPreferencesKey(PreferencesKeys.CHRONOMETER)]
                                 == true,
                         mistakeLimit =
                             preferences[booleanPreferencesKey(PreferencesKeys.MISTAKE_LIMIT)]

@@ -13,6 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import com.veragames.sudokufun.R
+import com.veragames.sudokufun.ui.theme.SudokuFunTheme
 
 @Composable
 fun OptionsRow(
@@ -45,6 +48,19 @@ fun OptionsRow(
                     )
                 }
             },
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun OptionsRowPreview() {
+    SudokuFunTheme {
+        OptionsRow(
+            checked = true,
+            textId = R.string.dark_mode_enabled,
+            onCheckedDescriptionId = android.R.string.ok,
+            onCheckedChange = {},
         )
     }
 }

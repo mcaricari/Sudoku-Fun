@@ -30,7 +30,7 @@ class SettingsViewModel
                     _state.update {
                         it.copy(
                             soundEffects = preferences.soundEffects,
-                            timer = preferences.timer,
+                            chronometer = preferences.timer,
                             mistakeLimit = preferences.mistakeLimit,
                             numberLock = preferences.numberLock,
                             removeUsedNumbers = preferences.removeUsedNumbers,

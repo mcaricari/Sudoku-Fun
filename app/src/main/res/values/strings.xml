@@ -17,7 +17,18 @@
     <string name="go_to_main_screen">Go to main screen</string>
     <string name="game_completed">Game completed!</string>
     <string name="dark_mode">Dark mode</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="sync">Sync</string>
     <string name="system_default">System default</string>
     <string name="dark_mode_enabled">Dark mode theme enabled</string>"
     <string name="system_default_theme_enabled">System default theme enabled</string>"
+    <string name="audio_effect">Audio Effect</string>"
+    <string name="chronometer">Chronometer</string>"
+    <string name="mistake_limit">Mistake Limit</string>
+    <string name="number_lock">Number Lock</string>
+    <string name="remove_used_numbers">Remove used numbers</string>
+    <string name="mistake_limit_description">You will lose if you make 3 mistakes</string>
+    <string name="number_lock_description">Lock a number by long pressing it to use it for multiple cells</string>
+    <string name="remove_used_numbers_description">Remove numbers when no longer needed</string>
 </resources>
