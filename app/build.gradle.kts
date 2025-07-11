@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.veragames.sudokufun"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.veragames.sudokufun"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 

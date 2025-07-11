@@ -1,9 +1,6 @@
-package com.veragames.sudokufun.data.preferences
+package com.veragames.sudokufun.ui.presentation.settingsscreen
 
-data class UserPreferences(
-    val theme: AppTheme? = null,
-    val darkMode: Boolean = false,
-    val followSystemTheme: Boolean = true,
+data class SettingsScreenState(
     val soundEffects: Boolean = true,
     val timer: Boolean = true,
     val mistakeLimit: Boolean = true,
