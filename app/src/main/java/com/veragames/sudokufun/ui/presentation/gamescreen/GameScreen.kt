@@ -45,7 +45,7 @@ fun GameScreen(
         topBar = {
             GameTopBar(
                 userScore = state.score,
-                onBackClick = {},
+                onBackClick = onBackToMainScreenClick,
                 onThemeClick = {
                     if (state.showThemeSelector.not()) {
                         viewModel.showThemeSelector(true)

@@ -38,6 +38,8 @@ class SettingsViewModel
                 appUseCases.getPreferences().collect { preferences ->
                     _state.update {
                         it.copy(
+                            darkMode = preferences.darkMode,
+                            systemTheme = preferences.followSystemTheme,
                             chronometer = preferences.timer,
                             mistakeLimit = preferences.mistakeLimit,
                             numberLock = preferences.numberLock,

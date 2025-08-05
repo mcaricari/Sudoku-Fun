@@ -33,7 +33,6 @@ fun OptionsRow(
     onCheckedChange: (value: Boolean) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    usesSwitch: Boolean = true,
     @DrawableRes iconId: Int? = null,
     @StringRes descriptionId: Int? = null,
 ) {
@@ -53,7 +52,7 @@ fun OptionsRow(
             modifier =
                 Modifier
                     .weight(1f)
-                    .padding(end = 32.dp),
+                    .padding(end = 32.dp, start = 12.dp),
         ) {
             CommonText(
                 text = stringResource(textId),
@@ -65,26 +64,24 @@ fun OptionsRow(
                     textAlign = TextAlign.Start,
                     style = MaterialTheme.typography.labelMedium,
                     maxLines = 6,
-                    color = Color.Unspecified.copy(alpha = 0.6f),
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                     modifier = Modifier.padding(4.dp),
                 )
             }
         }
-        if (usesSwitch) {
-            Switch(
-                checked = checked,
-                enabled = enabled,
-                onCheckedChange = { onCheckedChange(checked.not()) },
-                thumbContent = {
-                    if (checked) {
-                        Icon(
-                            imageVector = Icons.Filled.Check,
-                            contentDescription = stringResource(onCheckedDescriptionId),
-                        )
-                    }
-                },
-            )
-        }
+        Switch(
+            checked = checked,
+            enabled = enabled,
+            onCheckedChange = { onCheckedChange(checked.not()) },
+            thumbContent = {
+                if (checked) {
+                    Icon(
+                        imageVector = Icons.Filled.Check,
+                        contentDescription = stringResource(onCheckedDescriptionId),
+                    )
+                }
+            },
+        )
     }
 }
 

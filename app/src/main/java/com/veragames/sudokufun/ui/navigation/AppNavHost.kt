@@ -35,7 +35,11 @@ fun AppNavHost(modifier: Modifier = Modifier) {
             )
         }
         composable(Screen.SETTINGS.name) {
-            SettingsScreen()
+            SettingsScreen(
+                onGoBack = {
+                    navController.navigateUp()
+                },
+            )
         }
     }
 }

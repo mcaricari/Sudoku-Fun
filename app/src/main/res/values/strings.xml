@@ -7,6 +7,7 @@
     <string name="hint">Hint</string>
     <string name="notes">Notes</string>
     <string name="pause_game_and_go_back_content_desc">Pause game and go back</string>
+    <string name="settings_go_back_content_desc">Go back to the game screen</string>
     <string name="select_theme_content_desc">Select theme</string>
     <string name="open_settings_content_desc">Open settings</string>
     <string name="resume">Resume</string>
@@ -35,4 +36,8 @@
     <string name="checked_description_mistake_limit_enabled">Mistake limit enabled</string>
     <string name="checked_description_number_lock_enabled">Number lock enabled</string>
     <string name="checked_description_number_done_enabled">Remove used numbers enabled</string>
+    <string name="checked_description_dark_mode_enabled">Dark mode enabled</string>
+    <string name="checked_description_sync_system_theme">Sync system theme enabled</string>
+    <string name="settings_screen_title">Settings</string>
+
 </resources>
