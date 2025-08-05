@@ -172,7 +172,7 @@ fun GameScreen(
     }
 
     LifecycleEventEffect(Lifecycle.Event.ON_PAUSE) {
-        viewModel.pauseGame()
+        viewModel.pauseGame() // Comentar para quitar el dialog al ir a settings
     }
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
