@@ -7,6 +7,7 @@
     <string name="hint">Hint</string>
     <string name="notes">Notes</string>
     <string name="pause_game_and_go_back_content_desc">Pause game and go back</string>
+    <string name="settings_go_back_content_desc">Go back to the game screen</string>
     <string name="select_theme_content_desc">Select theme</string>
     <string name="open_settings_content_desc">Open settings</string>
     <string name="resume">Resume</string>
@@ -17,7 +18,26 @@
     <string name="go_to_main_screen">Go to main screen</string>
     <string name="game_completed">Game completed!</string>
     <string name="dark_mode">Dark mode</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="sync">Sync</string>
     <string name="system_default">System default</string>
     <string name="dark_mode_enabled">Dark mode theme enabled</string>"
     <string name="system_default_theme_enabled">System default theme enabled</string>"
+    <string name="audio_effect">Audio Effect</string>"
+    <string name="chronometer">Chronometer</string>"
+    <string name="mistake_limit">Mistake Limit</string>
+    <string name="number_lock">Number Lock</string>
+    <string name="remove_used_numbers">Remove used numbers</string>
+    <string name="mistake_limit_description">You will lose if you make 3 mistakes</string>
+    <string name="number_lock_description">Lock a number by long pressing it to use it for multiple cells</string>
+    <string name="remove_used_numbers_description">Remove numbers when no longer needed</string>
+    <string name="checked_description_chronometer_enabled">Chronometer enabled</string>
+    <string name="checked_description_mistake_limit_enabled">Mistake limit enabled</string>
+    <string name="checked_description_number_lock_enabled">Number lock enabled</string>
+    <string name="checked_description_number_done_enabled">Remove used numbers enabled</string>
+    <string name="checked_description_dark_mode_enabled">Dark mode enabled</string>
+    <string name="checked_description_sync_system_theme">Sync system theme enabled</string>
+    <string name="settings_screen_title">Settings</string>
+
 </resources>

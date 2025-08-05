@@ -37,6 +37,21 @@ class DataStoreRepositoryImpl
                         followSystemTheme =
                             preferences[booleanPreferencesKey(PreferencesKeys.FOLLOW_SYSTEM_THEME)]
                                 == true,
+                        soundEffects =
+                            preferences[booleanPreferencesKey(PreferencesKeys.SOUND_EFFECTS)]
+                                == true,
+                        timer =
+                            preferences[booleanPreferencesKey(PreferencesKeys.CHRONOMETER)]
+                                == true,
+                        mistakeLimit =
+                            preferences[booleanPreferencesKey(PreferencesKeys.MISTAKE_LIMIT)]
+                                == true,
+                        numberLock =
+                            preferences[booleanPreferencesKey(PreferencesKeys.NUMBER_LOCK)]
+                                == true,
+                        removeUsedNumbers =
+                            preferences[booleanPreferencesKey(PreferencesKeys.REMOVE_USED_NUMBERS)]
+                                == true,
                     )
                 }
 

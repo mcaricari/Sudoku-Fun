@@ -35,6 +35,7 @@ import com.veragames.sudokufun.ui.presentation.components.ThemeSelector
 @Composable
 fun GameScreen(
     onBackToMainScreenClick: () -> Unit,
+    onSettingsClick: () -> Unit,
     viewModel: GameViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
@@ -44,13 +45,13 @@ fun GameScreen(
         topBar = {
             GameTopBar(
                 userScore = state.score,
-                onBackClick = {},
+                onBackClick = onBackToMainScreenClick,
                 onThemeClick = {
                     if (state.showThemeSelector.not()) {
                         viewModel.showThemeSelector(true)
                     }
                 },
-                onSettingsClick = {},
+                onSettingsClick = onSettingsClick,
                 setIconThemePosition = viewModel::setIconThemePosition,
             )
         },
@@ -171,7 +172,7 @@ fun GameScreen(
     }
 
     LifecycleEventEffect(Lifecycle.Event.ON_PAUSE) {
-        viewModel.pauseGame()
+        viewModel.pauseGame() // Comentar para quitar el dialog al ir a settings
     }
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
