@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.veragames.sudokufun.ui.presentation.gamescreen.GameScreen
 import com.veragames.sudokufun.ui.presentation.homescreen.HomeScreen
+import com.veragames.sudokufun.ui.presentation.settingsscreen.SettingsScreen
 
 @Composable
 fun AppNavHost(modifier: Modifier = Modifier) {
@@ -26,10 +27,15 @@ fun AppNavHost(modifier: Modifier = Modifier) {
         composable(Screen.GAME.name) {
             GameScreen(
                 onBackToMainScreenClick = {
-                    navController.navigate(Screen.MAIN.name)
                     navController.popBackStack(Screen.MAIN.name, inclusive = false)
                 },
+                onSettingsClick = {
+                    navController.navigate(Screen.SETTINGS.name)
+                },
             )
+        }
+        composable(Screen.SETTINGS.name) {
+            SettingsScreen()
         }
     }
 }

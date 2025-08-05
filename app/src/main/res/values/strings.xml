@@ -31,4 +31,8 @@
     <string name="mistake_limit_description">You will lose if you make 3 mistakes</string>
     <string name="number_lock_description">Lock a number by long pressing it to use it for multiple cells</string>
     <string name="remove_used_numbers_description">Remove numbers when no longer needed</string>
+    <string name="checked_description_chronometer_enabled">Chronometer enabled</string>
+    <string name="checked_description_mistake_limit_enabled">Mistake limit enabled</string>
+    <string name="checked_description_number_lock_enabled">Number lock enabled</string>
+    <string name="checked_description_number_done_enabled">Remove used numbers enabled</string>
 </resources>

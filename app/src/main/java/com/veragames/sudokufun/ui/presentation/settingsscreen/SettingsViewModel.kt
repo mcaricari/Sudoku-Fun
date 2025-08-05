@@ -24,12 +24,20 @@ class SettingsViewModel
             fetchPreferences()
         }
 
+        fun updatePreference(
+            key: String,
+            value: Boolean,
+        ) {
+            viewModelScope.launch {
+                appUseCases.updateUserPreference(key, value)
+            }
+        }
+
         private fun fetchPreferences() {
             viewModelScope.launch {
                 appUseCases.getPreferences().collect { preferences ->
                     _state.update {
                         it.copy(
-                            soundEffects = preferences.soundEffects,
                             chronometer = preferences.timer,
                             mistakeLimit = preferences.mistakeLimit,
                             numberLock = preferences.numberLock,
