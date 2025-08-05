@@ -136,7 +136,7 @@ fun GameScreen(
                             }
                         },
                         onLongClick = {
-                            if (state.notesEnabled.not()) {
+                            if (state.notesEnabled.not() && state.numberLockEnabled) {
                                 viewModel.selectValue(value)
                             }
                         },

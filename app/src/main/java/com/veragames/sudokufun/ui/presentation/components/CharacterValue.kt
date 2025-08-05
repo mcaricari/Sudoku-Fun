@@ -1,7 +1,6 @@
 package com.veragames.sudokufun.ui.presentation.components
 
 import android.content.res.Configuration
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,7 +19,6 @@ import com.veragames.sudokufun.data.model.SudokuValue
 import com.veragames.sudokufun.ui.Dimens
 import com.veragames.sudokufun.ui.util.TestTags
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CharacterValue(
     value: SudokuValue,
@@ -51,7 +49,8 @@ fun CharacterValue(
                         haptics.performHapticFeedback(HapticFeedbackType.LongPress)
                         onLongClick()
                     },
-                ).testTag(TestTags.getSudokuValueTestTag(value)),
+                )
+                .testTag(TestTags.getSudokuValueTestTag(value)),
     ) {
         CommonText(
             text = value.value.toString(),

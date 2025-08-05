@@ -24,4 +24,5 @@ data class GameScreenState(
     val darkModeEnabled: Boolean = false,
     val systemDefaultThemeEnabled: Boolean = true,
     val themeIconOffset: IntOffset = IntOffset(0, 0),
+    val numberLockEnabled: Boolean = true,
 )

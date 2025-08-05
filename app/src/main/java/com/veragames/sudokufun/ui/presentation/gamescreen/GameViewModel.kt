@@ -186,7 +186,11 @@ class GameViewModel
                             currentTheme = preferences.theme!!,
                             darkModeEnabled = preferences.darkMode,
                             systemDefaultThemeEnabled = preferences.followSystemTheme,
+                            numberLockEnabled = preferences.numberLock,
                         )
+                    }
+                    if (preferences.numberLock.not()) {
+                        selectValue(null)
                     }
                 }
             }
