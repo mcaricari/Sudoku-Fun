@@ -25,4 +25,6 @@ data class GameScreenState(
     val systemDefaultThemeEnabled: Boolean = true,
     val themeIconOffset: IntOffset = IntOffset(0, 0),
     val numberLockEnabled: Boolean = true,
+    val showChronometer: Boolean = true,
+    val mistakeLimitEnabled: Boolean = true,
 )

@@ -187,6 +187,8 @@ class GameViewModel
                             darkModeEnabled = preferences.darkMode,
                             systemDefaultThemeEnabled = preferences.followSystemTheme,
                             numberLockEnabled = preferences.numberLock,
+                            mistakeLimitEnabled = preferences.mistakeLimit,
+                            showChronometer = preferences.timer,
                         )
                     }
                     if (preferences.numberLock.not()) {

@@ -85,6 +85,8 @@ fun GameScreen(
                 currentTime = state.time,
                 mistakes = state.mistakes,
                 maxMistakes = state.maxMistakes,
+                showChronometer = state.showChronometer,
+                showMistakes = state.mistakeLimitEnabled,
             )
             Board(
                 cellList = state.board,
@@ -153,6 +155,7 @@ fun GameScreen(
             maxMistakes = state.maxMistakes,
             difficulty = state.difficulty,
             onButtonClick = onBackToMainScreenClick,
+            showMistakes = state.mistakeLimitEnabled,
             gameCompleted = true,
         )
     } else if (state.gameRunning.not()) {
@@ -161,6 +164,7 @@ fun GameScreen(
             mistakes = state.mistakes,
             maxMistakes = state.maxMistakes,
             difficulty = state.difficulty,
+            showMistakes = state.mistakeLimitEnabled,
             onButtonClick = viewModel::resumeGame,
         )
     }

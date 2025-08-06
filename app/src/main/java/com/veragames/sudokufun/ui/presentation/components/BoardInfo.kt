@@ -29,6 +29,8 @@ fun BoardInfo(
     currentTime: String,
     mistakes: Int,
     maxMistakes: Int,
+    showChronometer: Boolean,
+    showMistakes: Boolean,
     modifier: Modifier = Modifier,
 ) {
     val textColor = MaterialTheme.colorScheme.onSurface
@@ -49,22 +51,26 @@ fun BoardInfo(
                     .weight(1f)
                     .testTag(TestTags.DIFFICULTY_INFO),
         )
-        CommonText(
-            text = currentTime,
-            color = textColor,
-            modifier =
-                Modifier
-                    .weight(1f)
-                    .testTag(TestTags.TIME_INFO),
-        )
-        MistakesInfo(
-            mistakes = mistakes,
-            maxMistakes = maxMistakes,
-            modifier =
-                Modifier
-                    .weight(1f)
-                    .testTag(TestTags.MISTAKES_INFO),
-        )
+        if (showChronometer) {
+            CommonText(
+                text = currentTime,
+                color = textColor,
+                modifier =
+                    Modifier
+                        .weight(1f)
+                        .testTag(TestTags.TIME_INFO),
+            )
+        }
+        if (showMistakes) {
+            MistakesInfo(
+                mistakes = mistakes,
+                maxMistakes = maxMistakes,
+                modifier =
+                    Modifier
+                        .weight(1f)
+                        .testTag(TestTags.MISTAKES_INFO),
+            )
+        }
     }
 }
 
@@ -99,6 +105,13 @@ fun MistakesInfo(
 @Composable
 private fun BoardInfoPrev() {
     SudokuFunTheme {
-        BoardInfo("Easy", "00:00", 0, 3)
+        BoardInfo(
+            difficulty = "Easy",
+            currentTime = "00:00",
+            mistakes = 3,
+            maxMistakes = 3,
+            showChronometer = true,
+            showMistakes = true,
+        )
     }
 }
