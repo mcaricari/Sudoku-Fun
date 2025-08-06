@@ -30,7 +30,7 @@ fun BoardInfo(
     mistakes: Int,
     maxMistakes: Int,
     showChronometer: Boolean,
-    showMistakes: Boolean,
+    mistakeLimit: Boolean,
     modifier: Modifier = Modifier,
 ) {
     val textColor = MaterialTheme.colorScheme.onSurface
@@ -61,16 +61,15 @@ fun BoardInfo(
                         .testTag(TestTags.TIME_INFO),
             )
         }
-        if (showMistakes) {
-            MistakesInfo(
-                mistakes = mistakes,
-                maxMistakes = maxMistakes,
-                modifier =
-                    Modifier
-                        .weight(1f)
-                        .testTag(TestTags.MISTAKES_INFO),
-            )
-        }
+        MistakesInfo(
+            mistakes = mistakes,
+            maxMistakes = maxMistakes,
+            mistakeLimit = mistakeLimit,
+            modifier =
+                Modifier
+                    .weight(1f)
+                    .testTag(TestTags.MISTAKES_INFO),
+        )
     }
 }
 
@@ -78,6 +77,7 @@ fun BoardInfo(
 fun MistakesInfo(
     mistakes: Int,
     maxMistakes: Int,
+    mistakeLimit: Boolean,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -91,7 +91,11 @@ fun MistakesInfo(
         )
         Spacer(Modifier.width(4.dp))
         CommonText(
-            text = stringResource(R.string.mistakes, mistakes, maxMistakes),
+            text = if (mistakeLimit) {
+                stringResource(R.string.mistakes, mistakes, maxMistakes)
+            } else {
+                stringResource(R.string.mistakes_no_limits, mistakes)
+            },
             color = MaterialTheme.colorScheme.onSurface,
         )
     }
@@ -111,7 +115,7 @@ private fun BoardInfoPrev() {
             mistakes = 3,
             maxMistakes = 3,
             showChronometer = true,
-            showMistakes = true,
+            mistakeLimit = true,
         )
     }
 }

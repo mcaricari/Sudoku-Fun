@@ -33,7 +33,7 @@ fun GameDialog(
     maxMistakes: Int,
     difficulty: String,
     onButtonClick: () -> Unit,
-    showMistakes: Boolean,
+    mistakeLimit: Boolean,
     modifier: Modifier = Modifier,
     gameCompleted: Boolean = false,
 ) {
@@ -94,13 +94,16 @@ fun GameDialog(
                         value = time,
                         modifier = Modifier.weight(1f),
                     )
-                    if (showMistakes) {
-                        DialogGameInfoItem(
-                            titleId = R.string.mistakes_txt,
-                            value = stringResource(R.string.mistakes, mistakes, maxMistakes),
-                            modifier = Modifier.weight(1f),
-                        )
-                    }
+                    DialogGameInfoItem(
+                        titleId = R.string.mistakes_txt,
+                        value =
+                            if (mistakeLimit) {
+                                stringResource(R.string.mistakes, mistakes, maxMistakes)
+                            } else {
+                                stringResource(R.string.mistakes_no_limits, mistakes)
+                            },
+                        modifier = Modifier.weight(1f),
+                    )
                     DialogGameInfoItem(
                         titleId = R.string.difficulty,
                         value = difficulty,
@@ -161,7 +164,7 @@ private fun PausedGameDialogPrev() {
             maxMistakes = 3,
             difficulty = "Normal",
             onButtonClick = {},
-            showMistakes = true,
+            mistakeLimit = true,
         )
     }
 }
@@ -177,7 +180,7 @@ private fun CompletedGameDialogPrev() {
             difficulty = "Normal",
             onButtonClick = {},
             gameCompleted = true,
-            showMistakes = true,
+            mistakeLimit = true,
         )
     }
 }
