@@ -12,6 +12,7 @@ interface GameRepository {
     suspend fun setCellValue(
         cell: Cell,
         value: Char,
+        isHint: Boolean = false,
     ): Boolean
 
     suspend fun eraseCellValue(cell: Cell): Boolean
@@ -38,4 +39,6 @@ interface GameRepository {
         cell: Cell,
         value: Char,
     )
+
+    suspend fun getMistakes(): StateFlow<Int>
 }

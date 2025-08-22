@@ -15,4 +15,5 @@ data class GameUseCases(
     val showHint: ShowHint,
     val checkGameCompletion: CheckGameCompletion,
     val noteValue: NoteValue,
+    val getMistakes: GetMistakes,
 )

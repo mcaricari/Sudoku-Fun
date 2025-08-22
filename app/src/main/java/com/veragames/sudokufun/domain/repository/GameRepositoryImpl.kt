@@ -25,15 +25,16 @@ class GameRepositoryImpl
         private val userMovements: MutableList<Cell> = mutableListOf()
         private val chronometer = Chronometer()
         private val hintsAvailable = MutableStateFlow(MAX_HINTS)
+        private val mistakes = MutableStateFlow(0)
 
         override suspend fun loadBoard(size: BoardSize) {
             boardSize = size
             board.update {
-                gameBoardSupplier.getBoard(size.size).first().map {
-                    if (it.value == SudokuValue.EMPTY.value) {
-                        it.copy(notes = size.values.map { Note(it) })
+                gameBoardSupplier.getBoard(size.size).first().map { cell ->
+                    if (cell.value == SudokuValue.EMPTY.value) {
+                        cell.copy(notes = size.values.map { Note(it) })
                     } else {
-                        it.copy(userCell = false)
+                        cell.copy(userCell = false)
                     }
                 }
             }
@@ -47,14 +48,20 @@ class GameRepositoryImpl
         override suspend fun setCellValue(
             cell: Cell,
             value: Char,
+            isHint: Boolean,
         ): Boolean {
             var result = false
             board.update { currentBoard ->
                 currentBoard.map { c ->
-                    if (c.isSame(cell) && c.completed.not() && c.userCell) {
-                        userMovements.add(c)
+                    if (c.isSame(cell) && c.completed.not() && c.userCell && cell.value != value) {
+                        if (isHint.not()) {
+                            userMovements.add(c)
+                        }
                         val tmpCell = cell.copy(value = value)
                         val conflicts = checkConflicts(tmpCell)
+                        if (conflicts) {
+                            mistakes.value += 1
+                        }
                         result = conflicts.not()
                         tmpCell.copy(value = value, conflict = conflicts, completed = conflicts.not())
                     } else {
@@ -175,6 +182,8 @@ class GameRepositoryImpl
             }
         }
 
+        override suspend fun getMistakes(): StateFlow<Int> = mistakes.asStateFlow()
+
         override suspend fun isRunning(): StateFlow<Boolean> = chronometer.isRunning()
 
         private fun checkConflicts(cell: Cell): Boolean {
@@ -194,7 +203,7 @@ class GameRepositoryImpl
                 possibleValues.forEach {
                     val tmpCell = cell.copy(value = it.value)
                     if (checkConflicts(tmpCell).not()) {
-                        setCellValue(tmpCell, it.value)
+                        setCellValue(cell, it.value, true)
                         return@setValue
                     }
                 }

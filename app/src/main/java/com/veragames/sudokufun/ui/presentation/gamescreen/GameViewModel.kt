@@ -40,6 +40,7 @@ class GameViewModel
             startResolutionChronometer()
             checkIfGameIsRunning()
             checkPreferences()
+            checkMistakes()
         }
 
         fun selectCell(cellUI: CellUI) {
@@ -272,6 +273,18 @@ class GameViewModel
                     _state.update { state ->
                         state.copy(
                             gameRunning = it,
+                        )
+                    }
+                }
+            }
+        }
+
+        private fun checkMistakes() {
+            viewModelScope.launch {
+                gameUseCases.getMistakes().collect {
+                    _state.update { state ->
+                        state.copy(
+                            mistakes = it,
                         )
                     }
                 }

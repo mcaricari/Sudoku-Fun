@@ -11,6 +11,7 @@ import com.veragames.sudokufun.domain.usecases.game.EraseCellValue
 import com.veragames.sudokufun.domain.usecases.game.GameUseCases
 import com.veragames.sudokufun.domain.usecases.game.GetBoard
 import com.veragames.sudokufun.domain.usecases.game.GetChronometer
+import com.veragames.sudokufun.domain.usecases.game.GetMistakes
 import com.veragames.sudokufun.domain.usecases.game.LoadBoard
 import com.veragames.sudokufun.domain.usecases.game.NoteValue
 import com.veragames.sudokufun.domain.usecases.game.PauseChronometer
@@ -45,6 +46,7 @@ object UseCasesModule {
             showHint = ShowHint(gameRepository),
             checkGameCompletion = CheckGameCompletion(gameRepository),
             noteValue = NoteValue(gameRepository),
+            getMistakes = GetMistakes(gameRepository),
         )
 
     @Provides
