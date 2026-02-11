@@ -1,4 +1,4 @@
-#Sudoku Fun
+# Sudoku Fun
 
 Sudoku Fun is a simple Sudoku Android game (currently under development).
 
@@ -10,4 +10,4 @@ It features:
 - Mistake Limit
 - 4 beautiful Material themes to choose from
 
-The idea is to link this app with the Sudoku board generator to generate boards according to a given difficulty.
+The idea is to link this app with the Sudoku board generator (https://github.com/mcaricari/Sudoku-Generator) to generate boards according to a given difficulty.
